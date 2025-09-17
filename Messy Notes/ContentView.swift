@@ -43,9 +43,9 @@ struct ContentView: View {
     @State private var cancellable: AnyCancellable? = nil
     @State private var isLoadingAI: Bool = false
     @State private var lastRawText: String = ""
+    @State private var showSettings: Bool = false
 
-    // Replace with your actual OpenAI API key
-    let openAIKey = "YOUR_OPENAI_API_KEY"
+    @AppStorage("openAIKey") private var openAIKey: String = ""
 
     let lenses = ["Summary", "Client Email", "Creative Direction"]
 
@@ -172,16 +172,24 @@ struct ContentView: View {
                         Button("PDF") { /* TODO: Implement PDF export */ }
                         Button("Clipboard") { copyToClipboard(note) }
                     }
+                    Divider()
+                    Button("Settings") {
+                        showSettings = true
+                    }
                 }
                 .frame(minWidth: 300)
             }
             .padding()
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
         }
     }
 
     // Call this function to classify text using GPT
     func classifyTextWithAI() {
         guard !note.rawText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        guard !openAIKey.isEmpty else { return }
         isLoadingAI = true
         let prompt = "Classify the following text into ideas, decisions, questions, actions, and summary as JSON: \n\(note.rawText)"
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
@@ -299,6 +307,28 @@ struct ContentView: View {
            let notes = try? JSONDecoder().decode([Note].self, from: data) {
             savedNotes = notes
         }
+    }
+}
+
+
+struct SettingsView: View {
+    @AppStorage("openAIKey") private var openAIKey: String = ""
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Settings")
+                .font(.title)
+            Text("OpenAI API Key:")
+            SecureField("sk-...", text: $openAIKey)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Button("Done") {
+                dismiss()
+            }
+            .padding(.top)
+        }
+        .padding()
+        .frame(width: 400)
     }
 }
 
