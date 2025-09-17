@@ -27,6 +27,7 @@
 		48B493002E7ADBE500C7E431 /* Messy Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Messy Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B4930E2E7ADBE800C7E431 /* Messy NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Messy NotesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B493182E7ADBE800C7E431 /* Messy NotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Messy NotesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48B4932B2E7ADCF400C7E431 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 		48B492F72E7ADBE500C7E431 = {
 			isa = PBXGroup;
 			children = (
+				48B4932B2E7ADCF400C7E431 /* README.md */,
 				48B493012E7ADBE500C7E431 /* Products */,
 			);
 			sourceTree = "<group>";
